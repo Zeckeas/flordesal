@@ -104,7 +104,7 @@ function App() {
 
           {/* Kit Selection */}
           <div className="bg-white/95 backdrop-blur rounded-xl shadow-2xl p-8 mb-8">
-            <h2 className="font-serif text-2xl mb-6 text-gray-800">1. Escolha seu Kit</h2>
+            <h2 className="font-serif text-2xl mb-6 text-gray-800">Escolha seu Kit</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {kits.map((kit) => (
                 <button
@@ -127,7 +127,7 @@ function App() {
             <>
               {/* Options Selection */}
               <div className="bg-white/95 backdrop-blur rounded-xl shadow-2xl p-8 mb-8">
-                <h2 className="font-serif text-2xl mb-6 text-gray-800">2. Escolha os Sabores</h2>
+                <h2 className="font-serif text-2xl mb-6 text-gray-800">Escolha os Sabores</h2>
                 
                 {/* Carboidratos */}
                 <div className="mb-8">
@@ -208,7 +208,7 @@ function App() {
 
               {/* Order Summary */}
               <div className="bg-white/95 backdrop-blur rounded-xl shadow-2xl p-8">
-                <h2 className="font-serif text-2xl mb-6 text-gray-800">3. Resumo do Pedido</h2>
+                <h2 className="font-serif text-2xl mb-6 text-gray-800">Resumo do Pedido</h2>
                 <div className="mb-6">
                   <p className="text-gray-600 text-lg">
                     Total selecionado: {totalQuantity} de{' '}
@@ -222,7 +222,7 @@ function App() {
                   )}
                 </div>
                 <a
-                  href={`https://wa.me/5511999999999?text=${formatWhatsAppMessage()}`}
+                  href={`https://wa.me/556199229635?text=${formatWhatsAppMessage()}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`w-full flex items-center justify-center gap-2 py-4 px-6 rounded-lg text-white font-medium transition-all ${
