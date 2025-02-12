@@ -22,15 +22,17 @@ const kits: Kit[] = [
 const carboidratos: Option[] = [
   { id: 1, name: 'Arroz Branco', quantity: 0 },
   { id: 2, name: 'Purê de Batata', quantity: 0 },
-  { id: 3, name: 'Macarrão ao Alho', quantity: 0 },
-  { id: 4, name: 'Arroz Integral', quantity: 0 },
+  { id: 3, name: 'Macarrão', quantity: 0 },
+  { id: 4, name: 'Escondidinho', quantity: 0 },
+  { id: 5, name: 'Purê de Abóbora', quantity: 0 },
 ];
 
 const proteinas: Option[] = [
   { id: 1, name: 'Almôndegas ao Sugo', quantity: 0 },
-  { id: 2, name: 'Frango Grelhado', quantity: 0 },
-  { id: 3, name: 'Carne ao Molho', quantity: 0 },
-  { id: 4, name: 'Peixe Grelhado', quantity: 0 },
+  { id: 2, name: 'Coxa ou Sobrecoxa Assada', quantity: 0 },
+  { id: 3, name: 'Frango com Creme de Milho', quantity: 0 },
+  { id: 4, name: 'Peito de Frango Grelhado', quantity: 0 },
+  { id: 5, name: 'Carne ao Molho', quantity: 0 },
 ];
 
 function App() {
@@ -84,40 +86,44 @@ function App() {
 
   return (
     <div 
-      className="min-h-screen bg-[#f8f5f0]"
+      className="min-h-screen bg-white flex flex-col"
       style={{
-        backgroundImage: `url('https://images.unsplash.com/photo-1495195134817-aeb325a55b65?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')`,
+        backgroundImage: `url('https://images.unsplash.com/photo-1543362906-acfc16c67564?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
       }}
     >
-      <div className="min-h-screen bg-black/30 backdrop-blur-sm py-12">
+      <div className="flex-grow bg-white/90 py-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-6">
-              <UtensilsCrossed className="w-16 h-16 text-[#e2c9a5]" />
+              <img 
+                src="https://i.imgur.com/watUar2.png" 
+                alt="Flor de Sal Logo" 
+                className="h-20 w-auto max-w-full" 
+               />
             </div>
-            <h1 className="font-serif text-6xl text-white mb-4">Flor de Sal</h1>
-            <p className="text-[#e2c9a5] text-xl font-light">Gastronomia Personalizada</p>
+            <h1 className="text-6xl text-[#2F855A] mb-4 font-light">Flor de Sal</h1>
+            <p className="text-[#276749] text-xl">Gastronomia Saudável</p>
           </div>
 
           {/* Kit Selection */}
-          <div className="bg-white/95 backdrop-blur rounded-xl shadow-2xl p-8 mb-8">
-            <h2 className="font-serif text-2xl mb-6 text-gray-800">Escolha seu Kit</h2>
+          <div className="bg-white border border-[#C6F6D5] rounded-lg p-8 mb-8">
+            <h2 className="text-2xl mb-6 text-[#2F855A] font-light">1. Escolha seu Kit</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {kits.map((kit) => (
                 <button
                   key={kit.id}
                   onClick={() => setSelectedKit(kit)}
-                  className={`p-6 rounded-xl border-2 transition-all ${
+                  className={`p-6 rounded-lg border transition-all ${
                     selectedKit?.id === kit.id
-                      ? 'border-[#c4a484] bg-[#f8f5f0]'
-                      : 'border-gray-200 hover:border-[#e2c9a5]'
+                      ? 'border-[#48BB78] bg-[#F0FFF4]'
+                      : 'border-[#C6F6D5] hover:border-[#48BB78]'
                   }`}
                 >
-                  <h3 className="font-serif text-xl mb-2">{kit.name}</h3>
-                  <p className="text-[#8b6b4d] font-semibold text-lg">R$ {kit.price.toFixed(2)}</p>
+                  <h3 className="text-xl mb-2 text-[#2F855A]">{kit.name}</h3>
+                  <p className="text-[#276749] font-medium text-lg">R$ {kit.price.toFixed(2)}</p>
                 </button>
               ))}
             </div>
@@ -126,34 +132,34 @@ function App() {
           {selectedKit && (
             <>
               {/* Options Selection */}
-              <div className="bg-white/95 backdrop-blur rounded-xl shadow-2xl p-8 mb-8">
-                <h2 className="font-serif text-2xl mb-6 text-gray-800">Escolha os Sabores</h2>
+              <div className="bg-white border border-[#C6F6D5] rounded-lg p-8 mb-8">
+                <h2 className="text-2xl mb-6 text-[#2F855A] font-light">2. Escolha os Sabores</h2>
                 
                 {/* Carboidratos */}
                 <div className="mb-8">
-                  <h3 className="font-serif text-xl text-gray-700 mb-4">Carboidratos</h3>
+                  <h3 className="text-xl text-[#2F855A] mb-4 font-light">Carboidratos</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {selectedCarbs.map((carb) => (
                       <div
                         key={carb.id}
-                        className="flex items-center justify-between p-4 border border-[#e2c9a5] rounded-lg bg-[#f8f5f0]"
+                        className="flex items-center justify-between p-4 border border-[#C6F6D5] rounded-lg bg-[#F0FFF4]"
                       >
-                        <span className="font-medium">{carb.name}</span>
+                        <span className="text-[#2F855A]">{carb.name}</span>
                         <div className="flex items-center gap-3">
                           <button
                             onClick={() =>
                               handleQuantityChange('carbs', carb.id, carb.quantity - 1)
                             }
-                            className="w-8 h-8 flex items-center justify-center rounded-full border border-[#c4a484] text-[#8b6b4d] hover:bg-[#e2c9a5] transition-colors"
+                            className="w-8 h-8 flex items-center justify-center rounded-full border border-[#48BB78] text-[#2F855A] hover:bg-[#C6F6D5] transition-colors"
                           >
                             -
                           </button>
-                          <span className="w-8 text-center font-semibold">{carb.quantity}</span>
+                          <span className="w-8 text-center font-medium text-[#2F855A]">{carb.quantity}</span>
                           <button
                             onClick={() =>
                               handleQuantityChange('carbs', carb.id, carb.quantity + 1)
                             }
-                            className="w-8 h-8 flex items-center justify-center rounded-full border border-[#c4a484] text-[#8b6b4d] hover:bg-[#e2c9a5] transition-colors"
+                            className="w-8 h-8 flex items-center justify-center rounded-full border border-[#48BB78] text-[#2F855A] hover:bg-[#C6F6D5] transition-colors"
                           >
                             +
                           </button>
@@ -165,14 +171,14 @@ function App() {
 
                 {/* Proteínas */}
                 <div>
-                  <h3 className="font-serif text-xl text-gray-700 mb-4">Proteínas</h3>
+                  <h3 className="text-xl text-[#2F855A] mb-4 font-light">Proteínas</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {selectedProteins.map((protein) => (
                       <div
                         key={protein.id}
-                        className="flex items-center justify-between p-4 border border-[#e2c9a5] rounded-lg bg-[#f8f5f0]"
+                        className="flex items-center justify-between p-4 border border-[#C6F6D5] rounded-lg bg-[#F0FFF4]"
                       >
-                        <span className="font-medium">{protein.name}</span>
+                        <span className="text-[#2F855A]">{protein.name}</span>
                         <div className="flex items-center gap-3">
                           <button
                             onClick={() =>
@@ -182,11 +188,11 @@ function App() {
                                 protein.quantity - 1
                               )
                             }
-                            className="w-8 h-8 flex items-center justify-center rounded-full border border-[#c4a484] text-[#8b6b4d] hover:bg-[#e2c9a5] transition-colors"
+                            className="w-8 h-8 flex items-center justify-center rounded-full border border-[#48BB78] text-[#2F855A] hover:bg-[#C6F6D5] transition-colors"
                           >
                             -
                           </button>
-                          <span className="w-8 text-center font-semibold">{protein.quantity}</span>
+                          <span className="w-8 text-center font-medium text-[#2F855A]">{protein.quantity}</span>
                           <button
                             onClick={() =>
                               handleQuantityChange(
@@ -195,7 +201,7 @@ function App() {
                                 protein.quantity + 1
                               )
                             }
-                            className="w-8 h-8 flex items-center justify-center rounded-full border border-[#c4a484] text-[#8b6b4d] hover:bg-[#e2c9a5] transition-colors"
+                            className="w-8 h-8 flex items-center justify-center rounded-full border border-[#48BB78] text-[#2F855A] hover:bg-[#C6F6D5] transition-colors"
                           >
                             +
                           </button>
@@ -207,28 +213,28 @@ function App() {
               </div>
 
               {/* Order Summary */}
-              <div className="bg-white/95 backdrop-blur rounded-xl shadow-2xl p-8">
-                <h2 className="font-serif text-2xl mb-6 text-gray-800">Resumo do Pedido</h2>
+              <div className="bg-white border border-[#C6F6D5] rounded-lg p-8">
+                <h2 className="text-2xl mb-6 text-[#2F855A] font-light">3. Resumo do Pedido</h2>
                 <div className="mb-6">
-                  <p className="text-gray-600 text-lg">
+                  <p className="text-[#2F855A] text-lg">
                     Total selecionado: {totalQuantity} de{' '}
                     {selectedKit.quantity * 2} opções necessárias
                   </p>
                   {!isValidOrder && (
-                    <p className="text-[#8b6b4d] text-sm mt-2 font-medium">
+                    <p className="text-[#276749] text-sm mt-2">
                       Selecione exatamente {selectedKit.quantity} carboidratos e{' '}
                       {selectedKit.quantity} proteínas
                     </p>
                   )}
                 </div>
                 <a
-                  href={`https://wa.me/556199229635?text=${formatWhatsAppMessage()}`}
+                  href={`https://wa.me/5511999999999?text=${formatWhatsAppMessage()}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`w-full flex items-center justify-center gap-2 py-4 px-6 rounded-lg text-white font-medium transition-all ${
                     isValidOrder
-                      ? 'bg-[#8b6b4d] hover:bg-[#725839]'
-                      : 'bg-gray-400 cursor-not-allowed'
+                      ? 'bg-[#2F855A] hover:bg-[#276749]'
+                      : 'bg-gray-300 cursor-not-allowed'
                   }`}
                   onClick={(e) => !isValidOrder && e.preventDefault()}
                 >
@@ -240,6 +246,23 @@ function App() {
           )}
         </div>
       </div>
+      
+      {/* Footer */}
+      <footer className="bg-[#2F855A] py-4">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-white text-sm">
+            Desenvolvido por{' '}
+            <a 
+              href="https://www.laboratech.com.br" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="font-medium hover:text-[#C6F6D5] transition-colors"
+            >
+              Labora Tech
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
