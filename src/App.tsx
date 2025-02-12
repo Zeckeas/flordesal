@@ -35,10 +35,20 @@ const proteinas: Option[] = [
   { id: 5, name: 'Carne ao Molho', quantity: 0 },
 ];
 
+const legumes: Option[] = [
+  { id: 1, name: 'Cenoura', quantity: 0 },
+  { id: 2, name: 'Abobrinha', quantity: 0 },
+  { id: 3, name: 'Brócolis', quantity: 0 },
+  { id: 4, name: 'Couve Flor', quantity: 0 },
+  { id: 5, name: 'Couve', quantity: 0 },
+];
+
 function App() {
   const [selectedKit, setSelectedKit] = useState<Kit | null>(null);
   const [selectedCarbs, setSelectedCarbs] = useState<Option[]>(carboidratos);
   const [selectedProteins, setSelectedProteins] = useState<Option[]>(proteinas);
+  const [selectedLegumes, setSelectedLegumes] = useState<Option[]>(legumes);
+
 
   const totalQuantity = useMemo(() => {
     const carbsTotal = selectedCarbs.reduce((acc, item) => acc + item.quantity, 0);
@@ -52,12 +62,19 @@ function App() {
   }, [selectedKit, totalQuantity]);
 
   const handleQuantityChange = (
-    type: 'carbs' | 'proteins',
+    type: 'carbs' | 'proteins' | 'legumes',
     id: number,
     newQuantity: number
   ) => {
-    const setter = type === 'carbs' ? setSelectedCarbs : setSelectedProteins;
-    const items = type === 'carbs' ? selectedCarbs : selectedProteins;
+    const setter =
+    type === 'carbs' ? setSelectedCarbs :
+    type === 'proteins' ? setSelectedProteins :
+    setSelectedLegumes;
+
+    const items =
+    type === 'carbs' ? selectedCarbs :
+    type === 'proteins' ? selectedProteins :
+    selectedLegumes;
     
     setter(
       items.map((item) =>
@@ -79,6 +96,10 @@ function App() {
       `*Proteínas:*\n${selectedProteins
         .filter((protein) => protein.quantity > 0)
         .map((protein) => `- ${protein.name}: ${protein.quantity}x`)
+        .join('\n')}\n\n` +
+      `*Legumes:*\n${selectedLegumes
+        .filter((legume) => legume.quantity > 0)
+        .map((legume) => `- ${legume.name}: ${legume.quantity}x`)
         .join('\n')}`;
 
     return encodeURIComponent(message);
@@ -94,6 +115,7 @@ function App() {
         backgroundAttachment: 'fixed'
       }}
     >
+      
       <div className="flex-grow bg-white/90 py-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
@@ -107,6 +129,36 @@ function App() {
             <h1 className="text-6xl text-[#2F855A] mb-4 font-light">Flor de Sal</h1>
             <p className="text-[#276749] text-xl">Gastronomia Saudável</p>
           </div>
+            {/* Informações sobre encomendas */}
+            <div className="bg-[#F0FFF4] text-[#2F855A] p-4 text-center border-b border-[#C6F6D5]">
+              <h2 className="text-lg font-semibold">Encomendas de Marmitas Fit - Prazo de Fechamento e Produção ✨🌿</h2>
+              <p className="mt-2">Olá, tudo bem? 😊</p>
+              <p className="mt-1">
+                Gostaríamos de lembrar que as encomendas para a semana devem ser feitas até as <strong>16h de toda segunda-feira</strong>. 
+                Com isso, conseguimos organizar a produção e garantir a entrega das marmitas fresquinhas para você!
+              </p>
+              <div className="mt-3 font-medium">
+                🔸 <strong>Fechamento das encomendas:</strong> até 16h de segunda-feira <br />
+                🔸 <strong>Produção das marmitas:</strong> todas as terças-feiras
+              </div>
+              <p className="mt-3">
+                Após esse horário, as encomendas para a semana seguinte serão registradas para a produção do próximo ciclo.
+              </p>
+              <p className="mt-2 font-semibold">
+                Por isso, não perca o prazo para garantir sua marmita deliciosa e saudável! 💚
+              </p>
+              <p className="mt-2">Se tiver dúvidas ou quiser fazer seu pedido, é só me chamar por aqui! </p>
+              
+              {/* Botão do WhatsApp */}
+              <a
+                href="https://wa.me/556199229635" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-lg shadow-md hover:bg-[#1EBE57] transition"
+              >
+                <span>Falar no WhatsApp</span>
+              </a>
+            </div>
 
           {/* Kit Selection */}
           <div className="bg-white border border-[#C6F6D5] rounded-lg p-8 mb-8">
@@ -212,6 +264,35 @@ function App() {
                 </div>
               </div>
 
+              {/* Legumes */}
+              <div className="mb-8">
+                <h3 className="text-xl text-[#2F855A] mb-4 font-light">Legumes</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {selectedLegumes.map((legume) => (
+                    <label
+                      key={legume.id}
+                      className="flex items-center p-4 border border-[#C6F6D5] rounded-lg bg-[#F0FFF4] cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={legume.quantity > 0}
+                        onChange={() =>
+                          handleQuantityChange(
+                            'legumes',
+                            legume.id,
+                            legume.quantity > 0 ? 0 : 1
+                          )
+                        }
+                        className="w-5 h-5 text-[#2F855A] border-[#48BB78] rounded focus:ring-[#48BB78]"
+                      />
+                      <span className="ml-3 text-[#2F855A]">{legume.name}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+
+
               {/* Order Summary */}
               <div className="bg-white border border-[#C6F6D5] rounded-lg p-8">
                 <h2 className="text-2xl mb-6 text-[#2F855A] font-light">3. Resumo do Pedido</h2>
@@ -228,7 +309,7 @@ function App() {
                   )}
                 </div>
                 <a
-                  href={`https://wa.me/5511999999999?text=${formatWhatsAppMessage()}`}
+                  href={`https://wa.me/556199229635?text=${formatWhatsAppMessage()}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`w-full flex items-center justify-center gap-2 py-4 px-6 rounded-lg text-white font-medium transition-all ${
