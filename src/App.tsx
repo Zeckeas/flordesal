@@ -48,7 +48,7 @@ function App() {
   const [selectedCarbs, setSelectedCarbs] = useState<Option[]>(carboidratos);
   const [selectedProteins, setSelectedProteins] = useState<Option[]>(proteinas);
   const [selectedLegumes, setSelectedLegumes] = useState<Option[]>(legumes);
-
+  const [clientName, setClientName] = useState('');
 
   const totalQuantity = useMemo(() => {
     const carbsTotal = selectedCarbs.reduce((acc, item) => acc + item.quantity, 0);
@@ -87,6 +87,7 @@ function App() {
     if (!selectedKit) return '';
 
     const message = `*Novo Pedido - Flor de Sal*\n\n` +
+      `*Cliente:* ${clientName}\n\n` +
       `*Kit Selecionado:* ${selectedKit.name}\n` +
       `*Valor:* R$ ${selectedKit.price.toFixed(2)}\n\n` +
       `*Carboidratos:*\n${selectedCarbs
@@ -183,9 +184,21 @@ function App() {
 
           {selectedKit && (
             <>
+              {/* Nome do Cliente */}
+              <div className="bg-white border border-[#C6F6D5] rounded-lg p-8 mb-8">
+                <h2 className="text-2xl mb-6 text-[#2F855A] font-light">2. Informe seu Nome</h2>
+                <input
+                  type="text"
+                  placeholder="Digite seu nome"
+                  value={clientName}
+                  onChange={(e) => setClientName(e.target.value)}
+                  className="w-full p-4 border border-[#C6F6D5] rounded-lg bg-[#F0FFF4] text-[#2F855A] placeholder-[#48BB78] focus:outline-none focus:border-[#48BB78]"
+                />
+              </div>
+
               {/* Options Selection */}
               <div className="bg-white border border-[#C6F6D5] rounded-lg p-8 mb-8">
-                <h2 className="text-2xl mb-6 text-[#2F855A] font-light">2. Escolha os Sabores</h2>
+                <h2 className="text-2xl mb-6 text-[#2F855A] font-light">3. Escolha os Sabores</h2>
                 
                 {/* Carboidratos */}
                 <div className="mb-8">
@@ -291,11 +304,9 @@ function App() {
                 </div>
               </div>
 
-
-
               {/* Order Summary */}
               <div className="bg-white border border-[#C6F6D5] rounded-lg p-8">
-                <h2 className="text-2xl mb-6 text-[#2F855A] font-light">3. Resumo do Pedido</h2>
+                <h2 className="text-2xl mb-6 text-[#2F855A] font-light">4. Resumo do Pedido</h2>
                 <div className="mb-6">
                   <p className="text-[#2F855A] text-lg">
                     Total selecionado: {totalQuantity} de{' '}
@@ -334,7 +345,7 @@ function App() {
           <p className="text-white text-sm">
             Desenvolvido por{' '}
             <a 
-              href="https://www.laboratech.com.br" 
+              href="https://www.labora-tech.com" 
               target="_blank" 
               rel="noopener noreferrer"
               className="font-medium hover:text-[#C6F6D5] transition-colors"
